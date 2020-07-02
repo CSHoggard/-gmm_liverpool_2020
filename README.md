@@ -1,14 +1,14 @@
-## Geometric Morphometrics (GMM) and Archaeology
+## Geometric Morphometrics (GMM) and Archaeology Workshop (July 2020)
 
 #### Organisers: Lucy Timbrell and Christopher Scott (University of Liverpool)
 #### Instructor: Dr. Christian Steven Hoggard (University of Southampton)
-#### Format: Digital Workshop (Slack/Zoom/GitHub)
+#### Format: Digital Workshop 
 
 #### About the workshops
 
 These three workshops are designed to provide an introduction into the application and potential of geometric morphometric (GMM) methodologies for archaeologists, researchers and enthusiasts. The first workshop introduces participants to the theoretical underpinnings of statistical shape and form analysis, from landmark options, data creation, data transformation, data analysis and visualisation. The second workshop will be an R-based introduction to two- and three-dimensional landmark-based GMM, while the third workshop focuses on two-dimensional outline analyses (Elliptic Fourier Analysis). While the workshop is limited to 50 participants, all code, presentations and material will be accessible via this repository.
 
-### Overview
+#### Overview
 
 * Session 1 (13th July): **Introduction to GMM** (via Zoom/Slack)
 * Session 2 (20th July): **Landmark-based GMM in R** (via Zoom/Slack)

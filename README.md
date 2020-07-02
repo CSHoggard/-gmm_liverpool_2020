@@ -10,9 +10,9 @@ These three workshops are designed to provide an introduction into the applicati
 
 ### Overview
 
-Session 1 (13th July): Introduction to GMM (via Zoom/Slack)
-Session 2 (20th July): Landmark-based GMM in R (via Zoom/Slack)
-Session 3 (27th July): Outline-based GMM in R (via Zoom/Slack)
+* Session 1 (13th July): **Introduction to GMM** (via Zoom/Slack)
+* Session 2 (20th July): **Landmark-based GMM in R** (via Zoom/Slack)
+* Session 3 (27th July): **Outline-based GMM in R** (via Zoom/Slack)
 
 #### Software
 

@@ -6,7 +6,7 @@
 
 #### About the workshops
 
-These three workshops are designed to provide an introduction into the application and potential of geometric morphometric (GMM) methodologies for archaeologists, researchers and enthusiasts. The first workshop introduces participants to the theoretical underpinnings of statistical shape and form analysis, from landmark options, data creation, data transformation, data analysis and visualisation. The second workshop will be an R-based introduction to two- and three-dimensional landmark-based GMM, while the third workshop focuses on two-dimensional outline analyses (Elliptic Fourier Analysis). While the workshop is limited to 50 participants, all code, presentations and material will be accessible via this repository.
+These three workshops are designed to provide participants with an introduction into the application and potential of geometric morphometric (GMM) methodologies for archaeological science. The first workshop introduces participants to the theoretical underpinnings of statistical shape and form analysis, from landmark options, data creation, data transformation, data analysis and visualisation. The second workshop will be an R-based introduction to two- and three-dimensional landmark-based GMM, while the third workshop focuses on two-dimensional outline analyses (Elliptic Fourier Analysis). Tidyverse approaches to data transformation and visualisation will be emphasised throughout the workshop. While the workshop is limited to 50 participants, all code, presentations and material will be accessible via this repository.
 
 #### Overview
 
@@ -17,6 +17,10 @@ These three workshops are designed to provide an introduction into the applicati
 #### Software
 
 All data input, manipulation and analyses will be **performed in the R Environment**. All data will be imported directly throughout the R Markdown (see relevant folders). **_Please ensure R/RStudio and all files are downloaded onto your computer or laptop before or at the beginning of the second workshop_**. 
+
+#### Participants and Slack
+
+All participants will shortly be invited to a Slack workspace. This workspace will provide an interface between the instructor, organisers and participants, and facilitate further dialogue. 
 
 #### Contact
 

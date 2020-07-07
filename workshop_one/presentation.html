@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Geometric Morphometrics (GMM)   and Archaeological Science</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Christian Hoggard" />
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Geometric Morphometrics (GMM) <br/> and Archaeological Science
+### Dr. Christian Hoggard
+### July 2020
+
+---
+
+
+
+
+
+
+class: center, middle
+
+# Welcome to these workshops!
+
+---
+class: left
+
+# Instructor
+
+**Dr. Christian Steven Hoggard** (Visiting Fellow, University of Southampton)
+
+[&lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 512 512"&gt;&lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/&gt;&lt;/svg&gt; @cshoggard](http://twitter.com/cshoggard) / [&lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 496 512"&gt;&lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/&gt;&lt;/svg&gt; @cshoggard](http://github.com/cshoggard) / [&lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 640 512"&gt;&lt;path d="M592 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h245.1v32h-160c-17.7 0-32 14.3-32 32s14.3 32 32 32h384c17.7 0 32-14.3 32-32s-14.3-32-32-32h-160v-32H592c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h512v288z"/&gt;&lt;/svg&gt; www.sites.google.com/site/christianhoggard](https://www.sites.google.com/site/christianhoggard/home) 
+  
+[&lt;svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 512 512"&gt;&lt;path d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/&gt;&lt;/svg&gt; C.S.Hoggard@soton.ac.uk](mailto:C.S.Hoggard@soton.ac.uk)  
+  
+Research Interests:
+1. Quantitative Archaeology in the R Environment
+2. The European Lower and Middle Palaeolithic
+3. Cultural Evolution and Taxonomies
+4. Open Science Approaches to Archaeology
+  
+Previous Workshops:
+* September 2019: [Sendai (Japan)](https://github.com/CSHoggard/-Morph2019)
+* December 2019: [Cologne (Germany)](https://github.com/CSHoggard/-cologne_workshop)
+* May 2020: [#StayHomeButStudy (Online)](https://github.com/CSHoggard/-workshopjapan2020)
+
+Publications:
+[Click here](https://www.sites.google.com/site/christianhoggard/home/publications)
+
+---
+# Workshop Structure
+
+There are **three workshops** in total... 
+
+--
+
+- **Workshop One** (now): Introduction to GMM and Archaeology
+
+--
+
+- **Workshop Two** (13th July): Landmark-based approaches to GMM (R practical)
+
+--
+
+- **Workshop Three** (27th July): Outline-based approaches to GMM (R practical)
+
+--
+
+About these workshops... 
+
+- No prior experience in R is necessary 😄
+
+- All data and R Markdowns (documents and presentations) are on [GitHub](https://www.github.com/CSHoggard/-gmm_liverpool_2020)
+
+- Slack Workspace for Q&amp;A (beyond these three sessions) and informal discussion!
+
+- Breaks throughout the workshops will facilitate additional questions and guidance! ✔️
+
+---
+class: inverse, left
+
+# What are we going to do today?
+
+I will introduction the subject of geometric morphometrics (GMM), specifically:
+
+1. Shape and shape theory
+
+2. Advantages (and disadvantages) of using GMM
+
+3. History of GMM
+
+4. How we 'do' GMM (data creation, transformation, analysis and visualisation)
+
+---
+background-image: url(figures/math.jpg)
+background-size: contain
+
+---
+class: inverse, middle, center
+
+# GMM &amp; Archaeological Science ✨
+
+---
+
+background-image: url("figures/selden_et_al_2018.png")
+background-size: 75%
+background-position: 50% 30%
+
+.footnote[Selden, R.Z. et al. (2018). Lithic morphological organisation: Gahagan bifaces from the Southern Caddo Area. *Digitial Applications in Archaeology and Cultural Heritage* 10: e00080.]
+
+---
+background-image: url("figures/mounier_et_al_2018.jpg")
+background-position: center
+background-size: 35%
+background-position: 50% 30%
+
+.footnote[Mounier, A. et al. (2018).  Who were the Nataruk people? Mandibular morphology among late Pleistocene and early Holocene fisher-forager populations of West Turkana (Kenya). *Journal of Human Evolution* 121: 235-253.]
+
+---
+class: left, bottom, inverse
+
+# But what is shape?
+
+---
+class: left
+
+background-image: url("figures/circles.jpg")
+background-position: center
+background-size: 45%
+background-position: 50% 60%
+
+# Shape as...
+
+“In general terms, the shape of an object, dataset or image that can be defined as the total of all information is invariant under **translation**, **rotation**, and **isotropic rescalings**” (Small, 1996: 6)
+
+.footnote[Small, C. (1996). *The statistical theory of shape*. New York: Springer.]
+
+---
+class: center
+
+background-image: url("figures/hippo.jpg")
+background-position: center
+background-size: 35%
+background-position: 50% 70%
+
+# And what about size?
+
+Do we use the length? the volume of the object? the mass of an object?
+
+---
+class: center, bottom
+
+background-image: url("figures/mitteroecker_et_al_2013.jpg")
+background-position: center
+background-size: 35%
+background-position: 50% 30%
+
+**Centroid size:** square root of the summed squared lengths of the dashed lines 
+.footnote[Mitteroecker et al. (2013). A brief review of shape, form, and allometry in geometric morphometrics, with applications to human facial morphology. *Hysterix, the Italian Journal of Mammalogy*: 59-66.
+]
+
+---
+class: center, middle
+
+background-image: url("figures/ssf.jpg")
+background-position: center
+background-size: 60%
+background-position: 50% 50%
+
+---
+class: inverse, left
+# Morphometrics 101
+
+* Term: Professor of Zoology Robert Blackith (1957)
+
+* Quantitative study of shape, shape variation and shape covariation
+
+* Two types of morphometric studies:
+
+  - Traditional morphometrics (length measurements, angles, ratios…)
+  
+  - Geometric morphometrics or GMM  (landmarks, outlines, curves, surfaces…)
+
+
+---
+class: left
+
+# Benefits and Drawbacks
+
+.pull-left[###👍 Benefits 👍
+- Degree of **shape resolution**
+
+- **Information loss**  (vs. linear measurements)
+
+- **Data can easily be collected** from methods including photographs, drawings and scans
+
+- Abstraction and registration procedure allow an analysis of **shape *sensu stricto***
+
+- Useful **visualisation** tool]
+
+.pull-right[### 👎 Drawbacks 👎
+- Required **skill level** (software, statistics...)
+
+- **Proceduralisation** (R is helping!)
+
+- **Landmark subjectivity**]
+
+---
+class: inverse, center
+
+# We can use GMM to determine whether…
+
+#### Two or more assemblages are different in shape?
+
+#### Shape is related to: size? sex? raw material? hominin?
+
+#### Shape differences correspond to a hypothesis or a model?
+
+#### Mean or median shapes are representative of a site?
+
+#### There are biologically inherent relationships?
+
+#### Networks of specific shapes can be identified? (over several sites)
+
+---
+class: bottom
+
+background-image: url("figures/time.jpg")
+background-size: contain
+background-size: 40%
+background-position: 95% 20%
+
+#A short history of Geometric Morphometrics...
+
+---
+class: left 
+
+background-image: url("figures/metmuseum.jpg")
+background-size: 50%
+background-position: 50% 75%
+
+# Albrecht Dürer (1471-1528)
+
+* Renaissance Paint, printer, theorist and **founder of descriptive geometry**
+
+* Worked on helices, conchoids, epicycloids and the Delian Problem (doubling the cube)
+
+* **Grid transformations** to catalogue and investigate morphological variation
+
+.footnote[*Draughtsman Making a Perspective Drawing of a Reclining Woman* c. 1525 Albrecht Dürer (The Met Museum: Public Domain).]
+
+---
+class: left 
+
+background-image: url("figures/dwt.jpg")
+background-size: 30%
+background-position: 95% 50%
+
+### Sir D’Arcy Wentworth Thompson (1860-1948)
+
+* Biologist, mathematician and classics scholar
+
+* Famous for his quotes on the mathematical beauty of nature &lt;br&gt; (inspiring Huxley, Turing, Lévi Strauss and van der Rohe) &lt;br/&gt; &lt;br&gt; &lt;br/&gt;
+
+### On Growth and Form (1916)
+
+* **Fundamental book on morphological variation in nature**
+
+* Emphasis on **mathemtical structures** accounting for diversity
+
+* Counter-argument to **vitalism** (while  challenging **natural selection**)
+
+.footnote[Professor Sir D'Arcy Wentworth Thompson (after a 1938 original). &lt;br&gt; *David Shanks Ewart (1901-1965). University of Dundee Fine Art Collections.* CC BY-NC-ND. &lt;br/&gt;]
+
+---
+class: bottom, center
+
+background-image: url("figures/thompson.jpg")
+background-size: 30%
+background-position: 50% 25%
+
+Thompson, D.W. (1917). *On Growth and Form*. Cambridge University.
+
+---
+class: left
+
+# Transition to Multivariate Morphometrics
+
+* **Fred Bookstein**: Cartesian transformations, Bookstein transformations, etc.
+
+* **David George Kendall (1918-2007)**: Objects of the same shape as seperate points in a geometric space
+
+* **Miriam Zelditch**: Complex shapes, morphological evolution and ecology
+
+* **Ian Dryden and Kanti Mardia**: Development of Fourier-based outline analysis
+
+* **Norman MacLeod**: Eigenshape analysis and palaeontological applications
+
+* **James Rohlf**: Statistical developments, biological applications and software
+---
+class: left
+
+# Another Ten Minute Break! ⏰
+&lt;br&gt; &lt;br/&gt;
+## Any Questions? 
+
+### Slack Workspace ("workshop_1") and Zoom!
+
+<div class="countdown" id="timer_5f046a04" style="top:0;right:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+class: center, middle
+background-image: url("figures/coffee.jpg")
+background-size: contain
+
+---
+class: left
+
+background-image: url("figures/computer.jpg")
+background-size: 25%
+background-position: 90% 50%
+
+# Stage 1: Collecting Input Data
+
+### Methods include (but are not limited to):
+
+  - **CT Scanning**
+  
+  - **Photogrammetry** and **Structure-from-Motion**
+  
+  - **Structured-light** Scanning
+  
+  - **Mono IR** (e.g. Kinect) and **Stereo IR** (Intel RealSense) Scanning
+  
+  - **MicroScribe** digitisers
+  
+  - **3D scanners** e.g. NextEngine Desktop
+  
+  - **Photographs** 
+  
+  - **Professional Illustrations**
+
+---
+class: left, inverse
+
+background-image: url("figures/claude_2008_1.jpg")
+background-size: 35%
+background-position: 100% 50%
+
+# Stage 2: Landmark Choice
+
+* Landmarks are central to GMM
+
+* Definition: a coordinate point used to represent a shape &lt;br&gt; and/or a homologous point on a structure &lt;br/&gt;
+
+* Quantifiable as Cartesian coordinates (x, y / z coordinates)
+
+* Flexibility in what types of landmark are required
+
+* Can be treated as individual points [workshop two] &lt;br&gt; or converted into curves and outlines [workshop three] &lt;br/&gt;
+
+.footnote[Claude, J. (2008). *Morphometrics with R*. Springer Publishing.]
+
+---
+class: left, inverse
+
+background-image: url("figures/combo.jpg")
+background-size: 35%
+background-position: 100% 50%
+
+# Stage 2: Landmark Choice
+
+#### Various types of landmarks
+* Type I: Homologous biological structures
+* Type II: Geometric definition e.g. greatest curvature
+* Type III: Point with reference to another point
+
+#### A special case: semi-landmarks 
+* Placed using an algorithm
+* Can cover the whole or part of a shape
+* Equidistant and placed between one or two end points
+* A special Type III landmark (*sensu* Bookstein)
+
+.footnote[Ros et al. (2013). Geometric morphometric analysis of grain shape and &lt;br&gt; the identification of two-rowed barley (Hordeum vulgare subsp. distichum L.) &lt;br&gt; in southern France. *Journal of Archaeological Science*. 41.]
+
+---
+class: left, inverse
+
+background-image: url("figures/combo.jpg")
+background-size: 35%
+background-position: 100% 50%
+
+# Stage 2: Landmark Choice
+
+#### Landmarks should...
+
+* sample aspects which are of archaeological interest
+
+* be repeatable and identifiable on all examples (if possible)
+
+* cover as much of the shape as possible
+
+* be sufficient as to not increase the ‘weighting of areas’
+
+* always be plotted in the same order! 
+
+.footnote[Ros et al. (2013). Geometric morphometric analysis of grain shape and &lt;br&gt; the identification of two-rowed barley (Hordeum vulgare subsp. distichum L.) &lt;br&gt; in southern France. *Journal of Archaeological Science*. 41.]
+
+---
+class: left
+
+# Some observations...
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt; 
+
+**For archaeological material...** | **For bioarchaeological material...**
+--------------------------------------- | ------------------------
+Poor morphological correspondence   | Greater morphological correspondence
+Less intuitive to examine in 3D     | More intuitive to examine in 3D...
+Fewer number of examples to compare with | Greater number of examples to compare with
+Fragmentation: major issue  | Fragmentation: major issue
+Higher sample size  | Lower sample size is necessary (esp. prehistory) 
+Often outline-centric | Often landmark-centric
+
+&lt;br/&gt; &lt;br/&gt; &lt;br/&gt;
+
+---
+class: left
+
+background-image: url("figures/vestergaard_and_hoggard_2019.jpg")
+background-size: 90%
+
+---
+class: left
+
+# Stage 3: Landmark digitisation
+
+### A variety of software is available, including:
+
+* TPS Suite (**TpsUtil** and **TpsDig2**)
+* CRAN-certified R Packages e.g. **geomorph**, **Momocs**, **StereoMorph** and **shape**
+* GitHub-based R Packages e.g. **GUIMorph**
+* **SlicerMorph** and **3DSlicer**
+* **PhyloNimbus**
+* **Stratovan Checkpoint** (£)
+* **EVAN Toolkit** (£)
+* and many, many more...
+
+Note: IDAV Landmark Editor (no longer available)
+
+Output: various file types including **.tps**, **.nts**, **.csv** and **.txt** formats
+
+---
+class: left
+
+background-image: url("https://upload.wikimedia.org/wikipedia/commons/d/d0/RStudio_logo_flat.svg")
+background-size: 35%
+background-position: 50% 85%
+
+# GMM (and Archaeology) in the R Environment
+
+* **Increasing number of packages** for shape (and archaeological) data
+
+* **Powerful** and **fairly straight-forward** to use
+
+* Last decade: **Archaeology as a more code-literate discipline**
+
+* **Advantages in data visualisation**
+
+* Product: **reproducible** and **replicable** **Open Science** approach
+
+---
+
+background-image: url("https://media.giphy.com/media/l0K4hqqqwgFijgVLa/giphy.gif")
+background-size: 60%
+background-position: 50% 40% 
+
+.footnote[https://media.giphy.com/media/l0K4hqqqwgFijgVLa/giphy.gif]
+
+---
+
+background-image: url("figures/xkcd.png")
+background-size: 55%
+background-position: 50% 40% 
+
+
+.footnote[https://xkcd.com/1945/]
+
+---
+class: left
+
+# Stage 4: Data screening
+
+* Do all my specimens have the **correct number of points**?
+
+* Are all my landmarks in the **correct order**?
+
+* Are the **ID labels correct**?
+
+* Are they to **scale**? (for size-integrated analyses)
+
+* Are **sliders** defined? (if using sliding semi-landmarks)
+
+### Importance of a code-book
+
+* Necessary to **'know'** your meta-data (e.g. #ID, technology, sex or raw material)
+
+* Ensure all your meta-data is **clear**, **easy to understand** and **formatted appropriately**
+
+---
+class: inverse, center, middle
+
+# Know your research question!
+
+---
+
+# Ten Minute Break! ⏰
+&lt;br&gt; &lt;br/&gt;
+## Any Questions? 
+
+### Slack Workspace ("workshop_1") and Zoom!
+
+<div class="countdown" id="timer_5f046883" style="top:0;right:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+background-image: url("figures/coffee.jpg")
+background-size: contain
+
+---
+class: left
+
+#Stage 5: Data Registration (isolating shape)
+
+A variety of analyses are available in GMM:
+
+1. **Landmark Analysis** (using landmarks)
+
+2. **Outline Analysis** (using semi-landmarks)
+
+  * **Elliptic Fourier Analysis** (semi-landmarks of a closed outline)
+  
+  * **Radii Fourier Analysis** (semi-landmarks of a closed outline)
+  
+  * **Discrete Cosine Transform** (semi-landmarks of an open outline)
+  
+3. **Miscellaneous** 
+
+  * **Eigenshape Analysis** (semi-landmarks of a closed outline)
+  
+&lt;br&gt;
+
+&lt;center&gt; The registration method changes depending on if you're analysing landmarks or outlines! &lt;center/&gt; 
+
+Landmarks: **Generalised Procrustes Analysis** | Outlines: **Fourier-based transformation**
+
+---
+class: center
+
+#Generalised Procrustes Analysis (GPA)
+
+#### (Procrustes Superimposition / Procrustes Fitting / Generalised Least Squares)
+
+&lt;br&gt;
+
+### **A procedure to isolate shape from a number of variables: &lt;br&gt; rotation, size and translation.**
+
+---
+
+background-image: url("https://media.giphy.com/media/11DFuwckOK9mdG/giphy.gif")
+background-size: 40%
+background-position: 50% 40% 
+
+.footnote[https://media.giphy.com/media/11DFuwckOK9mdG/giphy.gif]
+
+---
+class: left
+
+background-image: url("figures/mitteroecker_et_al_2013_2.jpg")
+background-size: 50%
+background-position: 100% 30%
+
+### Generalised Procrustes Analysis
+&lt;br&gt; 
+The raw coordinates (for all shapes) are…
+
+* Translated to a **common centroid** (A-B)
+
+* Scaled to a **common centroid size** (B-C)
+
+* Rotated to **minimise the sum of &lt;br&gt; squared-distances between landmarks** (C-D) &lt;br/&gt;
+
+* Outcome: **Procrustes coordinates** (shape)
+&lt;br/&gt;
+
+.footnote[Mitteroecker et al. (2013). A brief review of shape, form, and allometry in geometric morphometrics, &lt;br&gt; with applications to human facial morphology. *Hysterix, the Italian Journal of Mammalogy*. pp. 59-66.] &lt;br/&gt;
+
+---
+class: left
+
+background-image: url("figures/procrustes.png")
+background-size: 40%
+background-position: 95% 50%
+
+.pull-left[## Why Procrustes?
+
+* Damastes was a son of Poseidon &lt;br&gt; who lived on a sacred way (Attica)
+
+* There he had a bed, in which he invited every passer-by to spend the night. He would set to work on them with his blacksmith's hammer, to stretch them to "fit" the bed
+
+* Nickname: Procrustes ("The Stretcher")
+
+* If the guest proved too tall, Procrustes would amputate the excess length - nobody ever fitted the bed exactly! (**Procrustes Fitting**)
+
+* Procrustes continued his reign of terror until he was  "fitted" to his own bed by Theseus!
+
+* Link to source: [click here](https://medium.com/@bradyholmer/the-procrustean-bed-of-science-b499d79b81de)]
+
+---
+class: center
+
+background-image: url("figures/efa.png")
+background-size: 35%
+background-position: 20% 75%
+
+# Fourier-based transformation 
+
+In these methods, the **semi-landmarks are converted into curves**, &lt;br&gt; and the **coefficients which quantify these curves** are what we examine. &lt;br&gt; For example, in **Elliptic Fourier Analysis (EFA)** *sensu* Kuhl and Giardina (1982)... &lt;br/&gt;
+
+.footnote[ k = the **total number of steps around the outline** &lt;br&gt; n = the **harmonic number** &lt;br&gt; ∆x = the **displacement** between point p and p+1 &lt;br&gt; ∆t = the **length of the step** between point p and p+1 &lt;br&gt; tp = **accumulated length** of step segments at point &lt;br&gt; pT = **sum of lengths** of all steps around outline &lt;br&gt;&lt;br&gt;]
+
+---
+class: left
+
+## Stage 6: Some Exploratory &amp; Analytical Procedures
+
+Method | Data Input
+-------|-----------
+**Visualise Shape Change** | Procrustes coord. / Fourier coeff.
+**Principal Component Analysis (PCA)**| Procrustes coord. / Fourier coeff.
+**Discriminant Analysis (DA/DFA/LDA/CVA)** | Procrustes coord. / Fourier coeff. / PC Scores (+ Factor)
+**Procrustes ANOVA / MANOVA** | Procrustes coord. / Fourier coeff. / PC Scores (+ factor) 
+**Correlation &amp; Regression** | Procrustes coord. / Fourier coeff. / PC Scores (+ quant. variables)
+**Tree-building / Cluster Exercises** | Procrustes coord. / Fourier coeff. / PC Scores (+ optional factor)
+
+---
+class: left
+
+background-image: url("figures/claude_2008_2.png")
+background-size: 50%
+background-position: 95% 60%
+
+# Visualising Shape Change
+
+* Useful for comparing **individual** and **mean** shapes
+
+* Shape change can be represented as:
+
+  * Deformation grids
+  
+  * Contours
+  
+  * Outlines
+  
+  * Lollipop sticks
+  
+  * Vectors
+  
+
+.footnote[Claude, J. (2008). *Morphometrics with R*. Springer Publishing.]
+
+---
+class: left
+
+background-image: url("figures/scholtz_et_al_2020.png")
+background-position: contain
+
+.footnote[Scholtz et al. (2020). D'Arcy W. Thompson's Cartesian transformations: a critical evaluation. *Zoomorphology*. (https://doi.org/10.1007/s00435-020-00494-1)]
+
+---
+class: left
+
+# Principal Component Analysis (PCA)
+
+* Often the **first exploratory procedure**
+
+* **Ordination (multi-dimensional)** method
+
+* Each coordinate configuration = a shape
+
+* **Principal components = sources of shape variation**
+
+* Axis origin (0,0) = **mean shape**
+
+* Scree plots (for examining PC contributions)
+
+* **Important: total within-group variance is examined &lt;br&gt; and not between-group variance! (factors overlay the plot!)**
+
+.footnote[Hoggard et al. (2019). The Potential of Geometric Morphometrics for Danish Archaeology: Two Case Studies. &lt;br&gt; *Arkæologisk Forum*, 40:  30-42.  (http://www.archaeology.dk/16738/Nr.%2040%20-%202019).  OSF: https://osf.io/en5d2/ ] &lt;br/&gt;
+
+---
+class: left
+
+background-image: url("figures/hoggard_et_al_2019.png") 
+background-position: contain
+background-size: 70%
+
+---
+class: left
+
+background-image: url("figures/vestergaard_and_hoggard_2019_2.jpg") 
+background-position: 95% 45%
+background-size: 30%
+
+## Discriminant Analysis (DA)
+
+* Otherwise known as **Discriminant Function Analysis (DFA)** or...
+
+  * **Linear Discriminant Analysis** (LDA)
+  
+  * **Canonical Variate Analysis** (CVA)
+  
+* Investigates *a priori* classification through &lt;br&gt; **maximum between-group classification** &lt;br/&gt;
+
+* Percentage = success of classifier (as based on group data)
+
+* **Jacknifed percentage** 👈👈👈 
+
+  * **Leave-one-out cross-validation**
+  
+  * **Success with which a random shape can be correctly classified**
+
+&lt;br&gt;&lt;br&gt;
+Vestergaard, C. and Hoggard, C.S. (2019). A Novel Geometric Morphometric (GMM) &lt;br&gt;
+Application to the Study of Bronze Age Tutuli. *Danish Journal of Archaeology*, 8: 5-28. &lt;br/&gt;
+
+---
+class: left
+
+# Procrustes ANOVA / MANOVA
+
+* PCA and DA act as **exploratory devices** for looking at shape difference
+
+* MANOVA and Procrustes ANOVA provide a **statistical framework** for examining shape
+
+* Procrustes ANOVA: performed in `R::Geomorph`
+
+* MANOVA: performed in `R::Momocs`  
+
+* **Null Hypothesis: same populations / same shape**
+
+---
+class: left
+
+background-image: url("figures/hoggard_et_al_2019b.jpg") 
+background-position: 95% 50%
+background-size: 35%
+
+# Correlation and Regression
+
+* Useful for shape vs. quantitative data.
+
+* **Measure of association (impact of unit change)**
+
+* Possible variables: 
+
+  * **Centroid size** 
+  
+  * **Symmetry** 
+  
+  * **Latitude**
+  
+  * **Shape score**
+
+* Example methods: `base:: lm ()` or  `tidyverse`
+
+.footnote[Hoggard et al. (2019). The application of elliptic Fourier analysis in understanding biface shape  &lt;br&gt; and symmetry through the British Acheulean. *Journal of Paleolithic Archaeology*, 2 (2): 115-133.] &lt;br/&gt;
+
+---
+class: left
+
+background-image: url("figures/ivanovaite_et_al_2020.jpg") 
+background-position: 105% 45%
+background-size: 50%
+
+# Cluster &amp; Tree Exercises
+
+* Useful for examining *a posteriori* classifications
+
+* A variety of cluster analyses are available:
+
+  * `Momocs::CLUST` (Hierarchical Clustering)
+  
+  * `Rphylip::contml` (Maximum Likelihood)
+
+.footnote[Ivanovaite et al. (2020). All these fantastic cultures? Research history &lt;br&gt; and regionalisation in the Late Palaeolithic tanged point cultures &lt;br&gt; of Eastern Europe. *European Journal of Archaeology*, 23 (2): 162-185.] &lt;br/&gt;
+
+---
+class: left
+
+## &lt;center&gt; Technical Notes and Suggestions &lt;center/&gt;
+
+Principal Component Analysis: consider **between-groups PCA (bgPCA)**
+
+Discriminant Analysis: consider **Kovarovic et al. 2011** (notes on sample size!)
+
+Other cool methods:
+
+1) **Machine Learning** (Unsupervised vs. Supervised classificatory methods)
+
+2) **Bayesian Approaches** to GMM
+
+3) **Partial Least Squares (PLS) and Modularity Studies**
+
+.footnote[Kovarovic et al. (2011). Discriminant function analyses in archaeology: are classification rates too good to be true? &lt;br&gt; *Journal of Archaeological Science*, 38: 3008-3018. doi: 10.1016/j.jas.2011.06.028]
+
+---
+class: center, middle, inverse
+
+# Concluding Remarks
+
+## Geometric Morphometrics = 😍😍😍
+
+&lt;br&gt; 
+
+### In the future we will see...
+
+#### a wider application of GMM in Archaeological Science!
+
+#### a more powerful GMM analyses in Archaeological Science!
+
+#### a more open, replicable and reproducible Archaeological Science!
+
+&lt;br/&gt;
+
+---
+class: center, middle
+
+# Thank you for listening!
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+
+The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](http://yihui.name/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
+
+Licensing: Presentation: [CC-BY-3.0](http://creativecommons.org/licenses/by/3.0/us/)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "solarized-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

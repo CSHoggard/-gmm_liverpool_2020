@@ -10,7 +10,7 @@ These three workshops are designed to provide participants with an introduction 
 
 #### Overview
 
-* Session 1 (13th July): **Introduction to GMM** (via Zoom/Slack)
+* Session 1 (13th July): **Introduction to GMM** (via Zoom/Slack)  
 Presentation: https://cshoggard.github.io/introduction_to_arch_gmm/presentation.html#1
 
 * Session 2 (20th July): **Landmark-based GMM in R** (via Zoom/Slack)

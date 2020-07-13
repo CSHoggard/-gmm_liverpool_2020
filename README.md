@@ -6,24 +6,24 @@
 
 #### About the workshops
 
-These three workshops are designed to provide participants with an introduction into the application and potential of geometric morphometric (GMM) methodologies for archaeological science. The first workshop introduces participants to the theoretical underpinnings of statistical shape and form analysis, from landmark options, data creation, data transformation, data analysis and visualisation. The second workshop will be an R-based introduction to two- and three-dimensional landmark-based GMM, while the third workshop focuses on two-dimensional outline analyses (Elliptic Fourier Analysis). Tidyverse approaches to data transformation and visualisation will be emphasised throughout the workshop. While the workshop is limited to 50 participants, all code, presentations and material will be accessible via this repository.
+These three workshops are designed to provide participants with an introduction into the application and potential of geometric morphometric (GMM) methodologies for archaeological science. The first workshop introduces participants to the theoretical underpinnings of statistical shape and form analysis, from landmark options, data creation, data transformation, data analysis and visualisation. The second workshop will be an R-based introduction to two- and three-dimensional landmark-based GMM, while the third workshop focuses on two-dimensional outline analyses (Elliptic Fourier Analysis). 'Tidy' approaches to GMM data transformation and visualisation will be emphasised throughout the workshop. While the workshop is limited to 50 participants, all code, presentations and material (including videos) will be accessible.
 
 #### Overview
 
-* Session 1 (13th July): **Introduction to GMM** (via Zoom/Slack)  
+* Session 1 (13th July / 14:00-16:00): **Introduction to GMM** (via Zoom/Slack)  
 Presentation: https://cshoggard.github.io/-introduction_to_arch_gmm/presentation.html#1
 
-* Session 2 (20th July): **Landmark-based GMM in R** (via Zoom/Slack)
+* Session 2 (20th July / 14:00-16:00): **Landmark-based GMM in R** (via Zoom/Slack)
 
-* Session 3 (27th July): **Outline-based GMM in R** (via Zoom/Slack)
+* Session 3 (27th July / 14:00-16:00): **Outline-based GMM in R** (via Zoom/Slack)
 
 #### Software
 
-All data input, manipulation and analyses will be **performed in the R Environment**. All data will be imported directly throughout the R Markdown (see relevant folders). **_Please ensure R/RStudio and all files are downloaded onto your computer or laptop before or at the beginning of the second workshop_**. 
+All data input, manipulation and analyses will be **performed in the R Environment**. Data will be imported directly throughout the R Markdown (see relevant folders). **_Please ensure R/RStudio and all files are downloaded onto your computer or laptop before or at the beginning of the second workshop_**. Software including IDAV Landmark Editor and the TPS-series of packages will also be showcased.
 
 #### Participants and Slack
 
-All participants will shortly be invited to a Slack workspace. This workspace will provide an interface between the instructor, organisers and participants, and facilitate further dialogue. 
+All participants will be invited to a Slack workspace. This workspace will provide an interface between the instructor, organisers and participants, and facilitate further dialogue. 
 
 #### Contact
 

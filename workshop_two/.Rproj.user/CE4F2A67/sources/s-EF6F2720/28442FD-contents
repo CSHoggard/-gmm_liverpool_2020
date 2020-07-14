@@ -1,0 +1,73 @@
+---
+title: "Geometric Morphometrics and Archaeological Science"
+subtitle: "Workshop Two (July 2020)"
+author: "Dr. Christian Steven Hoggard (University of Southampton, United Kingdom)"
+output:
+  pdf_document:
+       latex_engine: xelatex 
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Introductory remarks**
+
+This guide provides a "hands-on" step-by-step introduction into the application of geometric morphometric (GMM) methodologies in archaeological science (as conducted through the R Environment). This guide will **provide an overview of some different methods of creating landmark data, before detailing three case studies (using 2D and 3D landmark data)**.
+
+**A presentation accompanies this markdown document**. We will use the presentation to guide us through this markdown document, with 3-5 minutes per 'chunk'. Chunks can be used as a means of rendering R output into documents, or to simply display code for illustration. The chunks presented here will minimise error resulting from manual input and ensure everyone is at the same stage. To run a 'chunk' (displayed as a shaded area and representing a function or suite of actions), we can press the "Run Selected Chunk" button, represented by a play button, or alternatively use the shortcut `ctrl + enter` on the highlighted code. **When you complete a function please use a "thumbs up" emoji on Slack. If there is an issue please raise your query in the Zoom Chat**. We are allowing time between functions to ensure that all participants (of varying R knowledge) can keep up; if you finish a particular process early please explore the functions in the packages used throughout this workshop, or individual functions through the 'Help' tab in the 'Packages' window.
+
+This practical constitutes the second (of three) workshops on GMM and Archaeological Science, organised by Lucy Timbrell and Christopher Scott and led by Dr. Christian Steven Hoggard.
+
+## **About the Code, Packages and Data**
+
+One published dataset and two unpublished datasets are used in this workshop. The data from the first practical originates from: Vestergaard, C. and Hoggard, C.S. (2019). A Novel Geometric Morphometric (GMM) Application to the Study of Bronze Age Tutuli. *Danish Journal of Archaeology*, 8: 5-28.  
+
+Data for this publication is stored on the Open Science Framework (https://osf.io/fcp43/) and is stored (for ease) on the workshop repository (https://github.com/CSHoggard/-gmm_liverpool_2020/tree/master/workshop_two). Data for the second and third case studies is unpublished and stored  on the workshop repository. This data is copyright protected under ownership law; please ask the repository owner (Dr. Christian Hoggard) for use beyond the remit of this workshop.
+
+For this workshop we will be focusing on the analysis of two- and three-dimensional landmark data. The following packages are required:  
+* **geomorph** v.3.3.1 (analysis of landmark data)  
+* **Momocs** v.1.3.0 (analysis of landmark data)  
+* **tidyverse** v.1.3.0 (visualisation of data)  
+* **rio** v.0.5.16 (import files from GitHub)  
+
+As we are using the rio package we will not be required to download the data to a working directory, and setting our RStudio accordingly (as is standard practice). Through the execution of all chunks in this markdown document all data will be imported, analysed and visualised.
+
+Once R and RStudio have been installed, and this markdown file opened within RStudio (through `File` -> `Open file`), we need to install the aforementioned packages. For this workshop we will install these packages through the below 'chunk'. 
+
+```{r, chunk1, , eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
+install.packages('geomorph', repos='http://cran.us.r-project.org')
+install.packages('Momocs', repos='http://cran.us.r-project.org')
+install.packages('tidyverse', repos='http://cran.us.r-project.org')
+install.packages('rio', repos='http://cran.us.r-project.org')
+```
+
+As the tidyverse and Momocs packages may take time to install given the size of the files *please ensure that these are downloaded prior the workshop*. Once installed we can now activate and use these packages through the `library()` function.
+
+```{r, chunk2, , eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+library(geomorph)
+library(Momocs)
+library(tidyverse)
+library(rio)
+```
+
+## Case Study 1: Tutuli in the Nordic Bronze Age (2D)
+
+In this first case study we will examine 376 tutuli from the Nordic Bronze Age. Tutuli are small circular plates and were originally thought to have been designed for practical purposes e.g. shield-buckles (Rafn 1856). More recently, archaeologists have argued that they function as clothing accessories e.g. beltware and cape buttons (Bergerbrant 1999). Here we will focus on the strength of pre-existing classificatory schemes, specifically: 
+
+* How successful can the four groups (types A/C/D/E) be differentiated?  
+
+* How successful can different shapes be attributed to different periods within the NBA?  
+
+28 two-dimensional landmarks were digitised (in tpsDig2) from professional illustrations of tutuli cross-sections. As these shapes are typically symmetric, and given their abundance in catalogues (Aner et al. 1973, 1976-1978, 1981, 1986, 1991, 1995, 2001, 2005, 2008, 2011, 2014, Aner and Kersten 1979;Aner, Kersten and Neumann 1984; Aner, Kersten and Koch 1990; Aner et al. 1993), these cross-section diagrams represent a source of great interpretive potential.  
+
+To do this we will first import the data, perform the necessary data registration method (**Generalised Procrustes Analysis**), explore the main sources of shape variation through a **Principal Component Analysis (PCA)**, before testing the robustness of these groups through a **MANOVA (Multivariate Analysis of Variance)** and a **Discriminant Function Analysis (DFA)**.  
+
+We will first import the data into the R Environment. As this data is .tps in format we could use either `Geomorph::readland.tps` or `Momocs::import_tps()`. As we will use Momocs throughout this first case study the `Momocs::import_tps()` is your best choice. However, as we are downloading this data from the GitHub repository we will use `rio::import` as follows:
+
+```{r}
+tutuli_data <- rio::import("https://github.com/CSHoggard/-workshopjapan2020/raw/master/workshop_2/database.rds")   
+
+tutuli_lm <- rio::import("https://github.com/CSHoggard/-workshopjapan2020/raw/master/workshop_2/tpslines.rds")

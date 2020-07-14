@@ -1,0 +1,68 @@
+"0","install.packages('geomorph', repos='http://cran.us.r-project.org')"
+"2","trying URL 'http://cran.us.r-project.org/bin/windows/contrib/4.0/geomorph_3.3.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 2624093 bytes (2.5 MB)
+"
+"2","downloaded 2.5 MB
+
+"
+"1","package ‘geomorph’ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1",""
+"1","The downloaded binary packages are in
+	C:\Users\cshog\AppData\Local\Temp\RtmpCK9vlV\downloaded_packages"
+"1",""
+"1","
+"
+"0","install.packages('Momocs', repos='http://cran.us.r-project.org')"
+"2","trying URL 'http://cran.us.r-project.org/bin/windows/contrib/4.0/Momocs_1.3.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 2537445 bytes (2.4 MB)
+"
+"2","downloaded 2.4 MB
+
+"
+"1","package ‘Momocs’ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1",""
+"1","The downloaded binary packages are in
+	C:\Users\cshog\AppData\Local\Temp\RtmpCK9vlV\downloaded_packages"
+"1",""
+"1","
+"
+"0","install.packages('tidyverse', repos='http://cran.us.r-project.org')"
+"2","trying URL 'http://cran.us.r-project.org/bin/windows/contrib/4.0/tidyverse_1.3.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 440111 bytes (429 KB)
+"
+"2","downloaded 429 KB
+
+"
+"1","package ‘tidyverse’ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1",""
+"1","The downloaded binary packages are in
+	C:\Users\cshog\AppData\Local\Temp\RtmpCK9vlV\downloaded_packages"
+"0","install.packages('rio', repos='http://cran.us.r-project.org')"
+"2","trying URL 'http://cran.us.r-project.org/bin/windows/contrib/4.0/rio_0.5.16.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 505220 bytes (493 KB)
+"
+"2","downloaded 493 KB
+
+"
+"1","package ‘rio’ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1",""

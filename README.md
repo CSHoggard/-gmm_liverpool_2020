@@ -11,7 +11,7 @@ These three workshops are designed to provide participants with an introduction 
 #### Overview
 
 * Session 1 (13th July / 14:00-16:00): **Introduction to GMM** (via Zoom/Slack)  
-Presentation: https://cshoggard.github.io/-introduction_to_arch_gmm/presentation.html#1
+Presentation: https://cshoggard.github.io/-gmm_liverpool_2020/workshop_one/presentation.html#1
 
 * Session 2 (20th July / 14:00-16:00): **Landmark-based GMM in R** (via Zoom/Slack)
 

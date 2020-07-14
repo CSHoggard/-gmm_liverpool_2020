@@ -68,8 +68,8 @@ To do this we will first import the data, perform the necessary data registratio
 We will first import the data into the R Environment. As this data is .tps in format we could use either `Geomorph::readland.tps` or `Momocs::import_tps()`. As we will use Momocs throughout this first case study the `Momocs::import_tps()` is your best choice. However, as we are downloading this data from the GitHub repository we will use `rio::import` as follows:
 
 ```{r}
-tutuli_lm <- rio::import("")
+tutuli_lm <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/blob/master/workshop_two/tutuli_lm.rds")
 
-tutuli_data <- rio::import("")   
+tutuli_data <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/blob/master/workshop_two/tutuli_data.rds")   
 
 ```

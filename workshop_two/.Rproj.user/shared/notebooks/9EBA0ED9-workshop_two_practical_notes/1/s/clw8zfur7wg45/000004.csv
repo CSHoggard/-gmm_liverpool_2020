@@ -1,0 +1,4 @@
+"0","tutuli_lm <- rio::import(""https://github.com/CSHoggard/-gmm_liverpool_2020/blob/master/workshop_two/tutuli_lm.rds"")
+"
+"2","Error in readRDS(file = file, ...) : unknown input format
+"

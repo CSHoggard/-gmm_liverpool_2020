@@ -2,6 +2,10 @@
     "path" : "C:/Users/cshog/Dropbox/CHRISTIAN/Academic Work/Github/-gmm_liverpool_2020/workshop_two",
     "sortOrder" : [
         {
+            "ascending" : false,
+            "columnIndex" : 4
+        },
+        {
             "ascending" : true,
             "columnIndex" : 2
         }

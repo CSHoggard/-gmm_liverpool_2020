@@ -350,11 +350,34 @@ This final example is part of current research the author is conducting as part 
 
 For this final exercise 21 left-sided patellae were examined through three-dimensional geometric morphometrics. These patellae stem from a cemetery site and represent a vast array of ages and occupations. 12 female patellae and nine male patellae are here examined. 14 landmarks and 75 sliding surface semi-landmarks were digitised, corresponding to the above procedure. A variety of Type I, Type II and Type III landmarks were chosen (please refer to the GitHub repository). An example patella accompanies the Github repository.
 
-Like before, we will download the dataset (with sex data), the sliding surface data and the .nts data through the functions in the rio package. A fourth file detailing the links between the landmarks is also included here. 
+Like before, we will download the dataset (with sex data), the sliding surface data and the .nts data through the functions in the rio package. A fourth file detailing the links between the landmarks is also included here. For reference:  
 
-```{r, chunk3}
-XXX <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/tutuli_lm.rds")
+* patella_dataset: the .csv file (containing the metadata)  
+* patella_lm: the multi.nts object (containing the landmark data)  
+* patella_links: the links between landmarks (for visualisation)  
+* patella_surfslide: the landmarks which are sliding surface semilandmarks  
 
-XXX <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/tutuli_data.rds")   
+
+```{r, chunk35, echo=TRUE, eval=TRUE, message=FALSE}
+patella_dataset <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/patella_dataset.rds")
+
+patella_lm <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/patella_lm.rds")
+
+patella_links <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/patella_links.rds")   
+
+patella_surfslide <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/patella_surfslide.rds")   
 
 ```
+
+As before, we need to inspect the dataset and its attributes. An inspection of the dataset with `utils::head()` reveals that the sex column is character in type, and like before we require the data to be factor (fct) in nature. We also require our surface sliding semilandmarks to be in matrix form.
+
+```{r chunk36, echo=TRUE, eval=TRUE, message=FALSE}
+head(patella_dataset)
+patella_dataset$sex <- as.factor(patella_dataset$sex)
+is.factor(patella_dataset$sex)
+
+patella_surfslide <- as.matrix(patella_surfslide)
+```
+
+
+

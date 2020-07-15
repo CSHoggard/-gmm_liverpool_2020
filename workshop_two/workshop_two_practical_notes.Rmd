@@ -17,7 +17,7 @@ knitr::opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
 
 This guide provides a "hands-on" step-by-step introduction into the application of geometric morphometric (GMM) methodologies in archaeological science (as conducted through the R Environment). This guide will **provide an overview of some different methods of creating landmark data, before detailing three case studies (using 2D and 3D landmark data)**.
 
-**A presentation accompanies this markdown document**. We will use the presentation to guide us through this markdown document, with 3-5 minutes per 'chunk'. Chunks can be used as a means of rendering R output into documents, or to simply display code for illustration. The chunks presented here will minimise error resulting from manual input and ensure everyone is at the same stage. To run a 'chunk' (displayed as a shaded area and representing a function or suite of actions), we can press the "Run Selected Chunk" button, represented by a play button, or alternatively use the shortcut `ctrl + enter` on the highlighted code. **When you complete a function please use a "thumbs up" emoji on Slack. If there is an issue please raise your query in the Zoom Chat**. We are allowing time between functions to ensure that all participants (of varying R knowledge) can keep up; if you finish a particular process early please explore the functions in the packages used throughout this workshop, or individual functions through the 'Help' tab in the 'Packages' window.
+We will spend roughly 3-5 minutes per 'chunk'. Chunks can be used as a means of rendering R output into documents, or to simply display code for illustration. The chunks presented here will minimise error resulting from manual input and ensure everyone is at the same stage. To run a 'chunk' (displayed as a shaded area and representing a function or suite of actions), we can press the "Run Selected Chunk" button, represented by a play button, or alternatively use the shortcut `ctrl + enter` on the highlighted code. **When you complete a function please use a "thumbs up" emoji on Slack. If there is an issue please raise your query in the Zoom Chat**. We are allowing time between functions to ensure that all participants (of varying R knowledge) can keep up; if you finish a particular process early please explore the functions in the packages used throughout this workshop, or individual functions through the 'Help' tab in the 'Packages' window.
 
 This practical constitutes the second (of three) workshops on GMM and Archaeological Science, organised by Lucy Timbrell and Christopher Scott and led by Dr. Christian Steven Hoggard.
 
@@ -254,6 +254,107 @@ In this next case study we will investigate three-dimensional shape changes in c
 
 In the previous case study we used Momocs to investigate our two-dimensional landmark data (in .tps format). It provided the most immediate form of analysis for our data, and allowed a number of interesting visualisations. In this example we will use geomorph to examine our three-dimensional data (in .ply ASCII format). Geomorph relies more on base R (in comparison to Momocs which is more 'tidy'), and so our grammar may change in areas.  
 
-Files of .ply format can be fed into 
+Files of .ply format can be fed into R through `geomorph::read.ply` through the sample code (providing that the data is saved to a working:
 
+```{r chunk24, echo=TRUE, eval=FALSE, message=FALSE}
+SK1 <- read.ply("skull_1.ply", ShowSpecimen = FALSE, addNormals = FALSE)
+```
 
+With the SK1 object we can now begin digitising landmarks onto the cranium. In this case study we will digitise 23 landmarks (refer to the landmark guides and documentation in the GitHub repository). For increased resolution we will include 200 surface sliding semilandmarks. Please see Gunz et al. (2005) and Mitteroecker and Gunz (2009) for more information.  
+
+In order to digitise our landmarks through this procedure we will first need to build a template for the digitisation of landmarks across specimens. This will be performed through the `geomorph::buildtemplate` function. This function requires an object of class mesh3d/shape3d (our .ply file), the number of fixed landmarks (23) and the number of surface.sliders (200). A graphical user interface (GUI) then appears allowing you to digitise your 23 landmarks; the 200 surface sliding landmarks will be automatically placed following this digitisation process (and for every subsequent specimen). Please refer to the R documentation (`?geomorph::buildtemplate`) for more information. This will be demonstrated throughout the workshop. I have included all six .ply files to allow digitisation following the workshop.  
+
+The resulting object is stored in the R Environment, with an .nts file saved into the working directory. Once the first skull has been digitised you continue the process with the `geomorph::digitsurface()` function.  
+
+When all the landmarks are digitised we can feed them all in together using the `geomorph::readmulti.nts`. For the purpose of the practical this object has been created in an .rds file and will be imported from the workshop GitHub repository (like in the previous case study.
+
+```{r chunk25, echo=TRUE, eval=TRUE, message=FALSE}
+skull <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/skull.rds")  
+```
+
+As you will observe in the environment the data is in *n* x *d* x *s*, with *n* being the number of landmarks in total, *d* being the dimensions explored, and *s* being the sample size. This is an array, a series of rows, columns and layers. In this example, if we wish to view a particular specimen we would use our square parentheses but this time include two commas (as we're interested in the third aspect of this array) e.g. for the first specimen we would code...  
+
+```{r chunk26, echo=TRUE, eval=FALSE, message=FALSE}
+skull[,,1]
+
+#OR
+
+rgl.open()
+rgl.points(skull[,,1], r = 0.2)
+```
+
+If a sufficient number of examples were included we could also use the `geomorph::plotOutliers` argument to examine which specimens have a Procrustes Distance from the mean (incase of a landmarking issue, for example). 
+
+A further two objects are necessary: the metadata (the .csv table with the skull data) and the slider file (denoting which landmarks slide). Again, with the the `rio::import()` function we can include them into this workspace:  
+
+```{r chunk27, echo=TRUE, eval=TRUE, message=FALSE}
+surface_lm_skull <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/surface_lm_skull.rds") 
+
+skull_data <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/skull_data.rds") 
+```
+
+We need to inspect the skull_data to verify that are columns are correct. Using the `base::head()` function we realise we again need to convert our sex column into `factor` class (we will not worry about location as we are only investigating sex here). Like previous, we can use the `base::is.factor()` argument to verify that our change is correct.
+
+```{r chunk28, echo=TRUE, eval=TRUE, message=FALSE}
+head(skull_data)
+skull_data$Sex <- as.factor(skull_data$Sex)
+is.factor(skull_data$Sex)
+```
+
+With the landmarks not imported into the R Environment, and our metadata in the correct format we can now begin registering our coordinate data through a Generalised Procrustes Analysis. Previously we used `Momocs::fgProcrustes()` with our two-dimensional coordinate data, for this dataset we will use the `geomorph::gpagen()` function. We input our landmark data and include our surface sliding semilandmark data.  
+
+```{r chunk29, echo=TRUE, eval=TRUE, message=FALSE}
+gpa_skull <- gpagen(skull, Proj = TRUE, ProcD = TRUE, curves = NULL, surfaces = surface_lm_skull, print.progress = F)
+```
+
+A class of gpagen data is returned. this includes the Procrustes coordinates, the centroid size, aspects of the dataset including the variance-covariance matrix and its format. We can inspect the result through the `graphics::plot()` function and customise the output using the rgl package.
+
+```{r chunk30, echo=TRUE, eval=FALSE, message=FALSE}
+plot(gpa_skull)
+```
+
+We can now inspect variation in our skull shape through a PCA. In geomorph, a PCA is formed through the `geomorph::gm.prcomp()` argument, with the input being our Procrustes coordinates. If phylogenetic data is provided then a Phyogenetically-Aligned Principal Component Analysis (PaCA) can be performed, however we are using a traditional PCA based on OLS-centering and projection.
+
+```{r chunk31, echo=TRUE, eval=TRUE, message=FALSE}
+pca_skull <- gm.prcomp(gpa_skull$coords)
+summary(pca_skull)
+```
+
+We can observe that in this example the first principal component accounts for 68.08% of all cumulative shape variation, with the first five components accounting for all variation (this is surprising as the number of components is limited by your degrees of freedom).
+
+We can also look at the three-dimensional configurations of different aspects of the principal components through an investigation of the `$shapes` component of the object.
+
+With this we can now plot our data in base R graphics as below (or use `rgl::plot.3d()` if we're being fancy! As our .nts files are in the correct order as the dataset we can attribute colour as attached. Match functions will be necessary if these are not alligned (with the id label mirrored in the .nts and dataset files).
+
+```{r chunk32, echo=TRUE, eval=TRUE, message=FALSE}
+plot(pca_skull, axis1 = 1, axis2 = 2, main = "Principal Component Analysis (PC1 vs. PC2)", pch = 19, cex  = 1.5, col = skull_data$Sex, font.lab = 2)
+```
+
+There are various means with which we can explore shape variation across PC space and visualising shape patterns. One way is through `geomorph::mshape()` and `geomorph::plotRefToTarget`. See on a simpler three-dimensional shape in the next case study.
+
+We can perform a Procrustes ANOVA and test for statistical difference between our specimens. First an object which captures all the information (coordinates and sex) must be created.
+
+```{r chunk33, echo=TRUE, eval=TRUE, message=FALSE}
+skulldf <- geomorph.data.frame(gpa_skull, sex = skull_data$Sex)
+```
+
+Once we have our data frame we can utilise the `geomorph::procD.lm()` and `stats::anova()` functions to test for statistical difference. If we use the `geomorph::procD.lm()` and create an object we can also extract QR compositions, fitted values and residuals (observed responses).
+
+```{r chunk34, echo=TRUE, eval=TRUE, message=FALSE}
+anova(procD.lm(coords ~ sex, data = skulldf))
+```
+
+## Case Study 3: Patella morphology vs. sex (3D)
+
+This final example is part of current research the author is conducting as part of the A Joint Effort project (https://twitter.com/UoSJointEffort), investigating the relationship in patella (kneecap) morphology, sex and behaviour.
+
+For this final exercise 21 left-sided patellae were examined through three-dimensional geometric morphometrics. These patellae stem from a cemetery site and represent a vast array of ages and occupations. 12 female patellae and nine male patellae are here examined. 14 landmarks and 75 sliding surface semi-landmarks were digitised, corresponding to the above procedure. A variety of Type I, Type II and Type III landmarks were chosen (please refer to the GitHub repository). An example patella accompanies the Github repository.
+
+Like before, we will download the dataset (with sex data), the sliding surface data and the .nts data through the functions in the rio package. A fourth file detailing the links between the landmarks is also included here. 
+
+```{r, chunk3}
+XXX <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/tutuli_lm.rds")
+
+XXX <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/tutuli_data.rds")   
+
+```

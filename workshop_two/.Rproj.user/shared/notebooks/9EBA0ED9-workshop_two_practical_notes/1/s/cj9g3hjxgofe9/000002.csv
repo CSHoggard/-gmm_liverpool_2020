@@ -1,0 +1,4 @@
+"0","plot(gpa_skull, mean = FALSE, label = FALSE, pt.cex = 2)
+"
+"2","Error in plotAllSpecimens(x$coords, ...) : unused argument (pt.cex = 2)
+"

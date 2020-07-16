@@ -1,0 +1,4 @@
+"0","plot(patellagpa, links = links, plot.param = list(pt.cex = 0.5, mean.bg = ""red""))
+"
+"2","Error in plotAllSpecimens(x$coords, ...) : object 'links' not found
+"

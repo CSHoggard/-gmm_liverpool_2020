@@ -1,0 +1,4 @@
+"0","ldk_tutuli <- Ldk(tutuli_lm$coo, links = outline, fac = tutuli_data)"
+"2","Error in structure(list(coo = coo, links = links, slidings = slidings,  : 
+  object 'outline' not found
+"

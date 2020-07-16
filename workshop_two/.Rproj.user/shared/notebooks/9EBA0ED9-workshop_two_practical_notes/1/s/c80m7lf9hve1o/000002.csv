@@ -1,0 +1,3 @@
+"0","surface_lm_skull <- rio::import(""https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/surface_lm_skull.rds"") "
+"0",""
+"0","skull_data <- rio::import(""https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/skull_data.rds"") "

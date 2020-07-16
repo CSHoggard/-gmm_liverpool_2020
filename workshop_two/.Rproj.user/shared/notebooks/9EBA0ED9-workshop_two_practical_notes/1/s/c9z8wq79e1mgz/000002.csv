@@ -1,0 +1,1 @@
+"0","skulldf <- geomorph.data.frame(gpa_skull, sex = skull_data$Sex)"

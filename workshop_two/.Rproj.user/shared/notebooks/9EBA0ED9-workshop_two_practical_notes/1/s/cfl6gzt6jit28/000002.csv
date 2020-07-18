@@ -1,0 +1,4 @@
+"0","tutuli_lm <- rio::import(""https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/tutuli_lm.rds"")"
+"0",""
+"0","tutuli_data <- rio::import(""https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/tutuli_data.rds"")   "
+"0",""

@@ -17,16 +17,19 @@ knitr::opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
 
 This guide provides a "hands-on" step-by-step introduction into the application of geometric morphometric (GMM) methodologies in archaeological science (as conducted through the R Environment). This guide will **provide an overview of some different methods of analysing landmark data, before detailing three case studies (using 2D and 3D landmark data)**.
 
-We will spend roughly 3-5 minutes per 'chunk'. Chunks can be used as a means of rendering R output into documents, or to simply display code for illustration. The chunks presented here will minimise error resulting from manual input and ensure everyone is at the same stage. To run a 'chunk' (displayed as a shaded area and representing a function or suite of actions), we can press the "Run Selected Chunk" button, represented by a play button, or alternatively use the shortcut `ctrl + enter` on the highlighted code. **When you complete a function please use a "thumbs up" emoji on Slack. If there is an issue please raise your query in the Zoom Chat**. We are allowing time between functions to ensure that all participants (of varying R knowledge) can keep up; if you finish a particular process early please explore the functions in the packages used throughout this workshop, or individual functions through the 'Help' tab in the 'Packages' window.
+We will spend roughly 3-5 minutes per 'chunk'. Chunks can be used as a means of rendering R output into documents, or to simply display code for illustration. The chunks presented here will minimise error resulting from manual input and ensure all participants are at the same stage. To run a 'chunk' (displayed as a shaded area and representing a function or suite of actions), we can press the "Run Selected Chunk" button, represented by a play button, or alternatively use the shortcut `ctrl + enter` on the highlighted code.  
 
-This practical constitutes the second of three workshops on GMM and Archaeological Science, organised by Lucy Timbrell and Christopher Scott and led by Dr. Christian Steven Hoggard.
+For participants: **When you complete a function please use a "thumbs up" emoji on Slack. If there is an issue please raise your query in the Zoom Chat**. We are allowing time between functions to ensure that all participants (of varying R knowledge) can keep up; if you finish a particular process early please explore the functions in the packages used throughout this workshop, or individual functions through the 'Help' tab in the 'Packages' window.
+
+This practical constitutes the second of three workshops on GMM and Archaeological Science, organised by Lucy Timbrell and Christopher Scott and led by Dr. Christian Steven Hoggard. This markdown, along with all resources (and recording of each workshop) can be found on the workshop GitHub repository: https://github.com/CSHoggard/-gmm_liverpool_2020.
+
+We thank the Arts and Humanities Research Council North West Consortium Doctoral Training Partnership (AHRC NWCDTP) for supporting this workshop.
 
 ## **About the Code, Packages and Data**
 
-One published dataset and two unpublished datasets are used in this workshop. The data from the first practical originates from:  
+One published dataset and two unpublished datasets are used in this workshop. The data from the first practical originates from: Vestergaard, C. and Hoggard, C.S. (2019). A Novel Geometric Morphometric (GMM) Application to the Study of Bronze Age Tutuli. *Danish Journal of Archaeology*, 8: 5-28. 
 
-Vestergaard, C. and Hoggard, C.S. (2019). A Novel Geometric Morphometric (GMM) Application to the Study of Bronze Age Tutuli. *Danish Journal of Archaeology*, 8: 5-28.  
-Data for this publication is stored on the Open Science Framework (https://osf.io/fcp43/) and is stored (for ease) on the workshop repository (https://github.com/CSHoggard/-gmm_liverpool_2020/tree/master/workshop_two). Data for the second and third case studies is unpublished and also stored on the workshop repository. This data is copyright protected under ownership law; please ask the repository owner (Dr. Christian Hoggard) for use beyond the remit of this workshop.
+Data for this publication is stored on the Open Science Framework (https://osf.io/fcp43/) and is stored (for ease) on the workshop repository (https://github.com/CSHoggard/-gmm_liverpool_2020/tree/master/workshop_two). Data for the second and third case studies are unpublished and also stored on the workshop repository. This data is copyright protected under ownership law; please ask the repository owner (Dr. Christian Hoggard) for use beyond the remit of this workshop.
 
 For this workshop we will be focusing on the analysis of two- and three-dimensional landmark data. The following packages are required:  
 
@@ -35,9 +38,9 @@ For this workshop we will be focusing on the analysis of two- and three-dimensio
 * **tidyverse** v.1.3.0 (visualisation of data)  
 * **rio** v.0.5.16 (import files from GitHub)  
 
-As we are using the rio package we will not be required to download the data to a working directory and setting our RStudio accordingly (as is standard practice). Through the execution of all chunks in this markdown document all data will be imported, analysed and visualised.
+We are using the rio package and so we will not be required to download the data to a working directory and setting our RStudio accordingly (as is standard practice). Through the execution of all chunks in this markdown document all data will be imported, analysed and visualised.
 
-Once R and RStudio have been installed, and this markdown file opened within RStudio (through `File` -> `Open file`), we need to install the aforementioned packages. For this workshop we will install these packages through the below 'chunk'. 
+Once R and RStudio have been installed, and this markdown file opened within RStudio (through `File` -> `Open file`), we need to install the aforementioned packages. For this workshop we will install these packages through the below 'chunk': 
 
 ```{r, chunk1, , eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 install.packages('geomorph', repos='http://cran.us.r-project.org')
@@ -46,7 +49,7 @@ install.packages('tidyverse', repos='http://cran.us.r-project.org')
 install.packages('rio', repos='http://cran.us.r-project.org')
 ```
 
-As the tidyverse and Momocs packages may take time to install given the size of the files *please ensure that these are downloaded prior the workshop*. Once installed we can now activate and use these packages through the `library()` function. These will need to be turned on every time we close RStudio.
+As the tidyverse and Momocs packages may take time to install given the size of the files *please ensure that these packages are downloaded prior the workshop*. Once installed we can now activate and use these packages through the `library()` function. 
 
 ```{r, chunk2, , eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
 library(geomorph)
@@ -57,39 +60,37 @@ library(rio)
 
 ## Case Study 1: Tutuli in the Nordic Bronze Age (2D)
 
-In this first case study we will examine 376 tutuli from the Nordic Bronze Age (NBA). Tutuli are small circular plates and were originally thought to have been designed for practical purposes e.g. shield-buckles (Rafn 1856). More recently, archaeologists have argued that tutuli function as clothing accessories e.g. beltware and cape buttons (Bergerbrant 1999). Here we will focus on the strength of pre-existing classificatory schemes, specifically: 
+In this first case study we will examine 375 tutuli from the Nordic Bronze Age (NBA). Tutuli are small circular plates and were originally thought to have been designed for practical purposes e.g. shield-buckles (Rafn 1856). More recently, archaeologists have argued that tutuli function as clothing accessories e.g. beltware and cape buttons (Bergerbrant 1999). Here we will focus on the strength of pre-existing classificatory schemes adopted by archaeologists, and address two questions. On the basis of pre-existing classificatory schemes: 
 
 * How successful can the four groups (types A/C/D/E) be differentiated?  
 
-* How successful can different shapes be attributed to different periods within the NBA?  
-
-Both of these research questions assess not their chronological robustness, but the strength of pre-existing archaeological classificatory schemes.
+* How successful can different shapes be attributed to different periods within the NBA?
 
 28 two-dimensional landmarks were digitised (in tpsDig2) from professional illustrations of tutuli cross-sections (a demo will be provided). As these shapes are typically symmetric, and given their abundance in catalogues (Aner et al. 1973, 1976-1978, 1981, 1986, 1991, 1995, 2001, 2005, 2008, 2011, 2014, Aner and Kersten 1979; Aner, Kersten and Neumann 1984; Aner, Kersten and Koch 1990; Aner et al. 1993), these cross-section illustrations represent a source of great interpretive potential. Please refer to Vestergaard and Hoggard (2019) for any of the above references. 
 
-To do this we will first import the data, perform the necessary data registration method (**Generalised Procrustes Analysis**), and explore the main sources of shape variation through a **Principal Component Analysis (PCA)**, before testing the robustness of these groups through a **MANOVA (Multivariate Analysis of Variance)** and a **Discriminant Function Analysis (DFA)**. A variety of other analyses can be performed; these will be demonstrated (subject to time limit).
+To do this we will first import the data, perform the necessary data registration method (**Generalised Procrustes Analysis**), and explore the main sources of shape variation through a **Principal Component Analysis (PCA)**, before testing the robustness of these groups through a **MANOVA (Multivariate Analysis of Variance)** and **Discriminant Function Analysis (DFA)**. A variety of other analyses can be performed; these will be demonstrated (subject to time limit).
 
-We will first import the data into the R Environment. As this data is .tps in format we could use either `Geomorph::readland.tps` or `Momocs::import_tps()`. As we will use Momocs throughout this first case study the `Momocs::import_tps()` is your best choice (it is also more appropriate for class conversion). However, as we are downloading this data from the GitHub repository we will use `rio::import` as follows:
+We will first import the data into the R Environment. As this data is .tps in format (with landmarks digitised in tpsDig2) we could use either `Geomorph::readland.tps` or `Momocs::import_tps()`. As we will use Momocs throughout this first case study the `Momocs::import_tps()` is your best choice (it is also more appropriate for class conversion in Momocs). As we are downloading this data from the GitHub repository we will use `rio::import` as follows:
 
-```{r, chunk3}
+```{r, chunk3, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
 tutuli_lm <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/tutuli_lm.rds")
 
 tutuli_data <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_two/tutuli_data.rds")   
 
 ```
 
-Note: for the purpose of this workshop I will detail in-text the function and its constitutent package e.g. `geomorph::readland.tps()`, however only the function is what will be 'used' so-to-speak e.g. `readland.tps()`. This helps you to understand what packages the functions originate from.  
+Note: for the purpose of this workshop I will detail in-text the function and its constitutent package e.g. `geomorph::readland.tps()`, however only the function is what we need to code e.g. `readland.tps()`. This helps you to understand what packages the functions originate from.  
 
-With our data now in the R Environment we can now call our tpsdata object through the `base:: View` functions. The `base::View()` function will highlight the three constituent parts of the tps file: the 1) *Coo* (coordinate data - generated in tpsDig2), 2) *cur* (the curve data if applicable - for sliders), and 3) *scale* (the scale data if present). It is the Coo data which we will take forward (size is not considered here).
+With our data now in the R Environment we can now call our tps object through the `base:: View` functions. The `base::View()` function will highlight the three constituent parts of the tps file: the 1) *Coo* (coordinate data - generated in tpsDig2), 2) *cur* (the curve data if applicable - for sliders), and 3) *scale* (the scale data if present). It is the Coo data which we will take forward (size is not considered here).
 
-We can examine the database using the `utils::head()`.
+We can first examine the database using the `utils::head()`.
 
-```{r, chunk4, message=FALSE, warning=FALSE}
+```{r, chunk4, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
 head(tutuli_data)
 
 ```
 
-In order to use these columns later we require them to be of class *factor* (`<fct>`); at present they are `<chr>`, that is to say of type 'character', an object that contains character strings.  We can do this quite easily using the `base::as.factor()` argument on the specific column (which can be called using the dollar sign). We can then double-check to ensure they are of class factor with the `base::is.factor()`, as follows:
+In order to use examine the date and classifications columns later we require them to be of class *factor* (`<fct>`); at present they are `<chr>`, that is to say of type 'character', an object that contains character strings.  We can do this quite easily using the `base::as.factor()` argument on the specific column (which can be called using the dollar sign). We can then double-check to ensure they are of class factor with the `base::is.factor()`, as follows:
 
 ```{r, chunk5, echo = TRUE, message=FALSE, warning=FALSE}
 tutuli_data$date <- as.factor(tutuli_data$date)
@@ -100,7 +101,7 @@ is.factor(tutuli_data$classification)
 
 ```
 
-Finally, we can convert our artefact id column into the row names using the `tibble::column_to_rownames` function.
+Finally, we can convert our artefact id column into the row names using the `tibble::column_to_rownames` function. Note: could have been performed during the .rds object creation.
 
 ```{r, chunk6, message=FALSE, warning=FALSE}
 tutuli_data <- column_to_rownames(tutuli_data, var = "artefact_id")
@@ -111,7 +112,7 @@ Our database is now formatted appropriately.
 
 Central to Momocs are a specific suite of shape classes, depending on the landmarking specific. These classes can be divided into three: 1) *outlines* (OutCoo), *open outlines* (OpnCoo) and *landmarks* (LdkCoo), with one class specific to your own dataset. While some operations in Momocs are generic and do not depend on one of these classes, many functions require your data to be one of these specific 'S3 objects'. In this instance our tps data is comprised of landmarks, and so we wish for our data to be `LdkCoo`, as to enable a Generalised Procrustes Analysis and subsequent exploratory and analytical procedures.  
 
-The coordinate data (coo) must therefore be turned into outline data through the `Momocs::Ldk()` function for the workflow to work. Once performed, we can then enter the object (here titled 'tutuli_shape') and examine its properties. For landmark visualisation we can input the links between the landmarks. This can be imported from a .csv file or notepad, however today we will create the links in-house, so to speak. This must be imported prior the `Momocs::Ldk()` function. The `base::rbind` function takes a series of vector data or a matrix and creates x number of columns. Each number corresponds to a landmark, with each paid being defined within one concatenated set of parentheses:
+The coordinate data (coo) must therefore be turned into outline data through the `Momocs::Ldk()` function for the workflow to work. Once performed, we can then enter the object (here titled 'tutuli_shape') and examine its properties. For landmark visualisation we can also input the links between the landmarks. This can be imported from a .csv file or a notepad file, however today we will create the links in-house, so to speak (note: this must be imported prior the `Momocs::Ldk()` function). The `base::rbind` function takes a series of vector data or a matrix and creates x number of columns. Each number corresponds to a landmark, with each paid being defined within one concatenated set of parentheses:
 
 ```{r, chunk7, message=FALSE, warning=FALSE}
 outline<-rbind(c(1,2),c(2,3),c(3,4),c(4,5),c(5,6),c(6,7),c(7,8),c(8,9),c(9,10),c(10,11),c(11,12),c(12,13),c(13,14),c(14,15),c(15,16),c(16,17),c(17,18),c(18,19),c(19,20),c(20,21),c(21,22),c(22,23),c(23,24),c(24,25),c(25,26),c(26,27),c(27,28),c(28,1))
@@ -129,7 +130,7 @@ Note: we need to call the coordinate component of the object. If we wish we can 
 ldk_tutuli[3]
 ```
 
-Now our data is in the R environment and in the appropriate class required for Momocs, we can examine the landmark configurations We can first look at all landmarks through the `Momocs::panel()` function (Note: this will take some time and it is advised not to use this function during the workshop). We can also use the `Momocs::inspect()` and `Momocs::coo_plot()` functions for additional visualisations (we will focus on these next week with our outline data). But for example:  
+Now our data is in the R environment and in the appropriate class required for Momocs, we can examine the landmark configurations We can first look at all landmarks through the `Momocs::panel()` function (note: this will take some time and it is advised not to use this function during the workshop). We can also use the `Momocs::inspect()` and `Momocs::coo_plot()` functions for various other shape classes (we will focus on these next week with our outline data). But for example:  
 
 ```{r, chunk10, message=FALSE, warning=FALSE, fig.cap = "An example plot of the tutuli using the `Momocs::coo_plot()` function. The size and the shape of landmarks can be customised using the `cex` and `pch` arguments.", fig.dim = c(6,6)}
 coo_plot(ldk_tutuli[8], cex = 1.5, pch = 20, col = "grey", poly = TRUE, centroid = FALSE, border = TRUE)
@@ -145,7 +146,7 @@ We can now remove all factors external to shape (scaling, translation and rotati
 
 * *Partial Procrustes between two shapes* (`Momocs::pProcrustes`)  
 
-Which procedure you use is depending on the types of shapes you have (sliders vs. non-sliders) and the nature of the superimposition. We require the `Momocs::fgProcrustes` function. This iterative process will return a number of useful components, including the number of iterations, the pairwise distance measures, the mean shape configuration and, if scale has been included, the centroid sizes. This object is now of class *LdkCoe* (landmark coefficients), this is important when considering what functions can be used in Momocs. Note: we could alternatively import and analyse our data through geomorph, using the `geomorph::readland.tps()` and `geomorph::gpagen()` functions.  
+Which procedure you use depends on the types of shapes you have (sliders vs. non-sliders) and the nature of the superimposition. We require the `Momocs::fgProcrustes` function for this particular dataset and process. This iterative process will return a number of useful components, including the number of iterations, the pairwise distance measures, the mean shape configuration and, if scale has been included, the centroid sizes. This object is now of class *LdkCoe* (landmark coefficients), this is important when considering what functions can be used in Momocs. Note: we could alternatively import and analyse our data through geomorph, using the `geomorph::readland.tps()` and `geomorph::gpagen()` functions.  
 
 ```{r, chunk11, message=FALSE, warning=FALSE}
 gpa_tutuli <- fgProcrustes(ldk_tutuli, tol = 0.1)
@@ -171,7 +172,7 @@ Technical note: scaling and centering are `TRUE` by default (however this can be
 
 With the PCA object we can assess the contribution of each source of shape variation through a **scree table** and **scree plot** using the `Momocs::scree()` and `Momocs::scree_plot()` arguments.
 
-```{r, chunk14, message=FALSE, warning=FALSE}
+```{r, chunk14, echo = TRUE, message=FALSE, warning=FALSE}
 scree(pca_tutuli)
 ```
 

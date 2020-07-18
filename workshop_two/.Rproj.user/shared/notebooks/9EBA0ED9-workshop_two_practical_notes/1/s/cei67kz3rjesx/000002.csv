@@ -1,0 +1,1 @@
+"0","ldk_tutuli <- Ldk(tutuli_lm$coo, links = outline, fac = tutuli_data)"

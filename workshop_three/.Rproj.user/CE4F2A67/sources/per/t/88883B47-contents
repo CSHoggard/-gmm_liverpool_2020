@@ -1,0 +1,28 @@
+---
+title: "Geometric Morphometrics and Archaeological Science"
+subtitle: "Workshop Three (July 2020)"
+author: "Dr. Christian Steven Hoggard (University of Southampton, United Kingdom)"
+output:
+  pdf_document:
+       latex_engine: xelatex 
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+```
+
+## **Introductory remarks**
+
+This guide provides a "hands-on" step-by-steph introduction into the application of geometric morphometric (GMM) methodologies in archaeological science (as cnducted through the R Environment). This guide will **provide an overview into analysing outline (open and closed) data through two case studies**.
+
+Like the previous workshop, we will spend roughly 3-5 minutes per 'chunk'. Chunks can be used as a means of rendering R output into documents, or to simply display code for illustration. The chunks presented here will minimise error resulting from manual input and ensure all participants are at the same stage. To run a 'chunk' (displayed as a shaded area and representing a function or suite of actions), we can press the "Run Selected Chunk" button, represented by a play button, or alternatively use the shortcut `ctrl + enter` on the highlighted code.  
+
+For participants: **When you complete a function please use a "thumbs up" emoji on Slack. If there is an issue please raise your query in the Zoom Chat**. We are allowing time between functions to ensure that all participants (of varying R knowledge) can keep up; if you finish a particular process early please explore the functions in the packages used throughout this workshop, or individual functions through the 'Help' tab in the 'Packages' window.
+
+This practical constitutes the third and final workshop on GMM and Archaeological Science, organised by Lucy Timbrell and Christopher Scott and led by Dr. Christian Steven Hoggard. This markdown, along with all resources (and recordings of each workshop) can be found on the workshop GitHub repository: https://github.com/CSHoggard/-gmm_liverpool_2020.
+
+We thank the Arts and Humanities Research Council North West Consortium Doctoral Training Partnership (AHRC NWCDTP) for supporting this workshop.
+
+## **About the Code, Packages and Data**

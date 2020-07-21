@@ -1,0 +1,70 @@
+---
+title: "Geometric Morphometrics and Archaeological Science"
+subtitle: "Workshop Three (July 2020)"
+author: "Dr. Christian Steven Hoggard (University of Southampton, United Kingdom)"
+output:
+  pdf_document:
+       latex_engine: xelatex 
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+```
+
+## **Introductory remarks**
+
+This guide provides a "hands-on" step-by-steph introduction into the application of geometric morphometric (GMM) methodologies in archaeological science (as cnducted through the R Environment). This guide will **provide an overview into analysing outline (open and closed) data through two case studies**.
+
+Like the previous workshop, we will spend roughly 3-5 minutes per 'chunk'. Chunks can be used as a means of rendering R output into documents, or to simply display code for illustration. The chunks presented here will minimise error resulting from manual input and ensure all participants are at the same stage. To run a 'chunk' (displayed as a shaded area and representing a function or suite of actions), we can press the "Run Selected Chunk" button, represented by a play button, or alternatively use the shortcut `ctrl + enter` on the highlighted code.  
+
+For participants: **When you complete a function please use a "thumbs up" emoji on Slack. If there is an issue please raise your query in the Zoom Chat**. We are allowing time between functions to ensure that all participants (of varying R knowledge) can keep up; if you finish a particular process early please explore the functions in the packages used throughout this workshop, or individual functions through the 'Help' tab in the 'Packages' window.
+
+This practical constitutes the third and final workshop on GMM and Archaeological Science, organised by Lucy Timbrell and Christopher Scott and led by Dr. Christian Steven Hoggard. This markdown, along with all resources (and recordings of each workshop) can be found on the workshop GitHub repository: https://github.com/CSHoggard/-gmm_liverpool_2020.
+
+We thank the Arts and Humanities Research Council North West Consortium Doctoral Training Partnership (AHRC NWCDTP) for supporting this workshop.
+
+## **About the Code, Packages and Data**
+
+We will examine one case-study throughout this practical:
+
+Inovaite et al. (2020). All these Fantastic Cultures? Research History and Regionalization in the Late Palaeolithic Tanged Point Cultures of Eastern Europe, European Journal of Archaeology,  23 (2): 162-185. (https://doi.org/10.1017/eaa.2019.59).
+
+The complete repository for this dataset can be found on GitHub (https://github.com/CSHoggard/-Eastern-Europe-Tanged-Points), in addition to the Open Science Framework (https://osf.io/agrwb/).
+
+For this final practical, three packages are required:  
+
+* **Momocs** v.1.3.0 (https://cran.r-project.org/web/packages/Momocs/index.html)  
+
+* **tidyverse** v.1.3.0 (https://cran.r-project.org/web/packages/tidyverse/index.html)  
+
+* **rio** v.0.5.16 (https://cran.r-project.org/web/packages/rio/index.html)  
+
+Similarly to the last practical we will be using the rio package to import our data into the environment. We therefore will not be required to set the working directory.
+
+With R and RStudio installed, and this markdown file opened within RStudio (through `File` -> `Open file`), we need to install the aforementioned packages. For this workshop we will install these packages through the below 'chunk':
+
+```{r chunk1, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+if(!require("Momocs")) install.packages('Momocs', repos='http://cran.us.r-project.org')  
+if(!require("tidyverse")) install.packages('tidyverse', repos='http://cran.us.r-project.org')
+if(!require("rio")) install.packages('rio', repos='http://cran.us.r-project.org')
+```
+
+As the tidyverse and Momocs packages may take time to install given the size of the files *please ensure that these are downloaded prior the workshop*. Once installed we can now activate and use these packages through the `library()` function. 
+
+```{r chunk2, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+library(Momocs)
+library(rio)
+library(tidyverse)
+```
+
+## **About the Data**  
+
+This data was composed to assess the robustness of cultural taxonomies in the Final Palaeolithic period of Eastern Europe, as portrayed through tanged point variants. 250 illustrations of tanged points were synthesised into one .tps file (using tpsUtil) before being digitised in tpsDig2 (https://life.bio.sunysb.edu/morph/soft-dataacq.html). Through the **outline object** function all tanged points were converted into outlines (a series of semi-landmarks, equidistant and placed using an algorithm, and of varying size). A database of all examples and their respective cultural assignment is also provided.  
+
+## **Creating and Importing GMM Data: Alternative Approaches**
+
+There are a number of ways with which outline data can be created. Here, all examples were digitised in tpsDig2 however functions in Momocs can also be used to extract outlines from silhouette data (black shape on white background). These are the the `Momocs::import_jpg()` and `Momocs::import_jpg1()` functions, derived from the `import_conte()` function translated into R by Claude (2008). This will be showcased by the instructor.
+
+There are also a number of different methods with which outline daya can be imported into the R Environment. Here, for ease and replicability, the outline data (in .tps format) was stored on a GitHub repository and directly fed into the R environment, utilising the `Momocs::import_tps()` function in a .rds file. Other ways to import .tps data (if saved locally) include the above function, `geomorph::readland.tps()` and rewriting tools in Momocs e.g. `Momocs::rw_rule()`. Data from stereomorph can also be imported through the `Momocs::import_StereoMorph_ldk()` and `Momocs:import_StereoMorph_curve()` functions.  

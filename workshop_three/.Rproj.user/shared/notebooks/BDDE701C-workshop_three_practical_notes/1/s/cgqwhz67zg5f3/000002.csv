@@ -1,0 +1,4 @@
+"0","database$Archaeological_Unit <- as.factor(database$Archaeological_Unit)"
+"0",""
+"0","is.factor(database$Archaeological_Unit)"
+"1","[1]"

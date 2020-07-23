@@ -1,0 +1,5 @@
+"0",""
+"0","tpsdata <- rio::import(""https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_three/tpslines.rds"")"
+"0",""
+"0","database <- rio::import(""https://github.com/CSHoggard/-gmm_liverpool_2020/raw/master/workshop_three/database.rds"")   "
+"0",""

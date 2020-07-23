@@ -1,3 +1,0 @@
-"0","if(!require(""Momocs"")) install.packages('Momocs', repos='http://cran.us.r-project.org')  "
-"0","if(!require(""tidyverse"")) install.packages('tidyverse', repos='http://cran.us.r-project.org')"
-"0","if(!require(""rio"")) install.packages('rio', repos='http://cran.us.r-project.org')"

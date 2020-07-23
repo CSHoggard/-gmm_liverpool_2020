@@ -1,0 +1,4 @@
+"0","centroidsize <- as_tibble(coo_centsize(shape))"
+"0","centroidsize <- rename(centroidsize, CS = ""value"")"
+"0","pcascores <- as_tibble(pcashape$x)"
+"0","databasedata <- cbind(database,centroidsize, pcascores)"

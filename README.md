@@ -18,6 +18,7 @@ Video: https://github.com/CSHoggard/-gmm_liverpool_2020/releases/tag/v1
 Video: https://github.com/CSHoggard/-gmm_liverpool_2020/releases/tag/v2
 
 * Session 3 (27th July / 14:00-16:00): **Outline-based GMM in R** (via Zoom/Slack)
+Video: https://github.com/CSHoggard/-gmm_liverpool_2020/releases/tag/v3
 
 #### Software
 

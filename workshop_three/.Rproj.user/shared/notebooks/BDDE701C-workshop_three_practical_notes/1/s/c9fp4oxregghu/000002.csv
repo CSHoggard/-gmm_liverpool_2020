@@ -1,1 +1,1 @@
-"0","meanshapes <- MSHAPES(efashape, ~Archaeological_Unit)"
+"0","meanshape <- MSHAPES(efashape, ~Archaeological_Unit)"

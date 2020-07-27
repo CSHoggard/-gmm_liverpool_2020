@@ -30,9 +30,9 @@ We thank the Arts and Humanities Research Council North West Consortium Doctoral
 
 We will examine one case-study throughout this practical:
 
-Inovaite et al. (2020). All these Fantastic Cultures? Research History and Regionalization in the Late Palaeolithic Tanged Point Cultures of Eastern Europe, European Journal of Archaeology,  23 (2): 162-185. (https://doi.org/10.1017/eaa.2019.59).
+Inovaite et al. (2020). All these Fantastic Cultures? Research History and Regionalization in the Late Palaeolithic Tanged Point Cultures of Eastern Europe, *European Journal of Archaeology*,  23 (2): 162-185. (https://doi.org/10.1017/eaa.2019.59).
 
-The complete repository for this dataset can be found on GitHub (https://github.com/CSHoggard/-Eastern-Europe-Tanged-Points), in addition to the Open Science Framework (https://osf.io/agrwb/).
+The complete repository for this dataset can be found in a stand-alone GitHub (https://github.com/CSHoggard/-Eastern-Europe-Tanged-Points) repository, in addition to the Open Science Framework (https://osf.io/agrwb/).
 
 For this final practical, three packages are required:  
 
@@ -70,12 +70,12 @@ This data was composed to assess the robustness of cultural taxonomies in the Fi
 
 There are a number of ways with which outline data can be created. Here, all examples were digitised in tpsDig2 however functions in Momocs can also be used to extract outlines from silhouette data (black shape on white background). These are the `Momocs::import_jpg()` and `Momocs::import_jpg1()` functions, derived from the `import_conte()` function translated into R by Claude (2008). Open outlines can be digitised through an amended `import_conte()` argument.  
 
-There are also a number of different methods with which outline data can be imported into the R Environment. Here, for ease and replicability, the outline data (in .tps format) was stored on a GitHub repository and directly fed into the R environment, utilising the `Momocs::import_tps()` function in a .rds file. Other ways to import .tps data (if saved locally) include the above function, `geomorph::readland.tps()` and rewriting tools in Momocs e.g. `Momocs::rw_rule()`. Data from stereomorph can also be imported through the `Momocs::import_StereoMorph_ldk()` and `Momocs:import_StereoMorph_curve()` functions.  
+There are also a number of different methods with which outline data can be imported into the R Environment. Here, for ease and replicability, the outline data (in .tps format) was stored on a GitHub repository and directly fed into the R environment, utilising the `Momocs::import_tps()` function in a .rds file. Other ways to import .tps data (if saved locally) include the above function, `geomorph::readland.tps()` and rewriting tools in Momocs e.g. `Momocs::rw_rule()`. Data from stereomorph can also be imported through the `Momocs::import_StereoMorph_ldk()` and `Momocs:import_StereoMorph_curve()` functions. The package `imager` is particularly impressive in readying images for outline extraction e.g. thresholding.
 
 
 ## **Stage 1: Importing the GMM Data into the R Environment**
 
-Let's import the tps outline data and the dataset from the GitHub workshop repository using the `rio::import()` functions
+Let's import the tps outline data and the dataset from the GitHub workshop repository using the `rio::import()` functions:
 
 ```{r, chunk3, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
 
@@ -88,7 +88,7 @@ database <- rio::import("https://github.com/CSHoggard/-gmm_liverpool_2020/raw/ma
 
 ## **Stage 2: Data Cleaning**  
 
-With both objects now in the R Environment we can now call our tpsdata object through the `base:: View` functions (however given the size of the object it is best advised to not use this argument). The `base::View()` function will highlight the three constituent parts of the tps file: the 1) *Coo* (coordinate data), 2) *cur* (the curve data if necessary), and 3) *scale* (the scale data if present). This echoes the structure of the first case study in the second workshop.  
+With both objects now in the R Environment we can call our tpsdata object through the `base:: View` functions (however given the size of the object it is best advised to not use this argument). The `base::View()` function will highlight the three constituent parts of the tps file: the 1) *Coo* (coordinate data), 2) *cur* (the curve data if necessary), and 3) *scale* (the scale data if present). This echoes the structure of the first case study in the second workshop.  
 
 We can inspect our database using the `utils::head()` function, this will highlight the first six rows of the base.  
 
@@ -115,9 +115,9 @@ summary(database$Archaeological_Unit)
 
 ## **Stage 3: Creation of the "Out" object**  
 
-Central to Momocs are a specific suite of shape classes for: 1) *outlines* (OutCoo), *open outlines* (OpnCoo) and *landmarks* (LdkCoo), with often one class specific to your own dataset. Previous we wanted our objects to be of class LdkCoo, in this instance however our tps data is comprised of outlines, and so we wish for our data to be `OutCoo`, as to enable efourier (elliptic Fourier) analyses. Other analyses including rfourier (radii Fourier) or tfourier (tangent angle Fourier) analyses can be conducted through this process but for this workshop we're only going consider elliptic Fourier analysis (EFA).
+Central to Momocs are a specific suite of shape classes for: 1) *outlines* (OutCoo), *open outlines* (OpnCoo) and *landmarks* (LdkCoo), with often one class specific to your own dataset. Previous we wanted our objects to be of class LdkCoo, in this instance however our tps data is comprised of outlines, and so we wish for our data to be `OutCoo`, as to enable efourier (elliptic Fourier) analyses. Other analyses including rfourier (radii Fourier) or tfourier (tangent angle Fourier) analyses can be conducted through this process, however for this workshop we're only going consider elliptic Fourier analysis (EFA).
 
-In this instance the coordinate data (coo) is transformed into outline data through the `Momocs::Out()`. When performed, we can then enter the object (here titled 'shape') and examine its properties.  
+In this instance the coordinate data (coo) is transformed into outline data through the `Momocs::Out()`. When performed we can then enter the object (here titled 'shape') and examine its properties:  
 
 ```{r chunk7, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE}
 shape <- Out(tpsdata$coo, fac = database) 

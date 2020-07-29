@@ -140,14 +140,14 @@ panel(shape, main = "", fac = 'Archaeological_Unit')
 An alternative to the `Momocs::panel()` function is `Momocs::mosaic()`, an updated display function (which will soon replace panel). This does include a legend, unlike the panel function, however as the function is experimental the legend drawing options are limited. 
 
 ```{r chunk9, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, fig.width = 5, fig.height = 5}
-mosaic(shape, ~Archaeological_Unit, asp = 1, legend = FALSE)
+mosaic(shape, ~Archaeological_Unit, asp = 1, legend = TRUE)
 ```
 
 We can draw individual shapes using the `Momocs::coo_plot()` function. A number of aesthetic or stylistic changes (including line colour and fill) are also possible. For example:  
 
 
 ```{r chunk10, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, fig.width = 3, fig.height = 3}
-coo_plot(shape[1], col = "grey", centroid = TRUE, main = "Artefact #1") 
+coo_plot(shape[4], col = "grey", centroid = TRUE, main = "Artefact #4") 
 ```
 
 We can also extract measurements from our outline data at this point using the many `Momocs::coo_()` functions. See towards the end of this document for examples.
@@ -200,7 +200,7 @@ When a level of harmonic power (shape complexity) is determined by the researche
 * `Momocs::calibrate_harmonicpower_efourier()`: This function estimates the number of harmonics required for the elliptic Fourier process (and all other Fourier processes).         
 * `Momocs::calibrate_reconstructions_efourier()`: This procedure calculates reconstructed shapes for a series of harmonic numbers. This process best demonstrates the harmonic process.  
 
-* `Momocs::calibrate_deviations_efourier`(): This procedure calculates deviations from the original and reconstructed shapes for a series of harmonic numbers.  
+* `Momocs::calibrate_deviations_efourier()`: This procedure calculates deviations from the original and reconstructed shapes for a series of harmonic numbers.  
 
 Let's perform these functions on our normalised dataset:
 
@@ -287,7 +287,7 @@ plot_PCA(pcashape, axes = c(1,3), ~Archaeological_Unit, morphospace_position = "
 The 'morphospace_position' and 'palette' arguments are incredible useful wonderful visualisation tool here, for example:  
 
 ```{r chunk25, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, fig.width = 7, fig.height = 7}
-plot_PCA(pcashape, axes = c(1,2), ~Archaeological_Unit, palette = pal_div_PiYG, morphospace_position = "circle", zoom = 1.5, chull = FALSE) %>% layer_points(cex = 1) %>% layer_ellipses()
+plot_PCA(pcashape, axes = c(1,2), ~Archaeological_Unit, palette = pal_div_PiYG, morphospace_position = "XY", zoom = 1.5, chull = FALSE) %>% layer_points(cex = 3)
 ```
 
 Note: the `pal_manual()` argument can be added to allow custom palettes.  
@@ -365,7 +365,7 @@ We can now use the elliptic Fourier coefficients and/or the PCA data to examine,
 To perform a Hierarchical Cluster Analysis we can use the `Momocs::CLUST()` function, a wrapper of `stats::dist()` and `stats::hclust()`. We can specify what type of shape we wish for our tree to be using the `type` argument (horizontal as default), and the specific `hclust` (complete as default) and `dist_method` (euclidean as default). Again, we can use the number of PCA scores as we find applicable or use the elliptic Fourier coefficients.  
 
 ```{r chunk31, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, fig.width = 7, fig.height = 7}
-CLUST(pcashape, ~Archaeological_Unit, dist_method = "euclidean", hclust_method = "complete", palette = pal_qual)
+CLUST(pcashape, ~Archaeological_Unit, dist_method = "euclidean", hclust_method = "complete", palette = pal_qual, k = 6)
 ```
 This tree can be further examined in the `ape` package and customised further through tree-specific packages e.g. `ggtree`. 
 
